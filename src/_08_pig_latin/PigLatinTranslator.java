@@ -1,6 +1,16 @@
 package _08_pig_latin;
 
-public class PigLatinTranslator {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import game_tools.Sound;
+
+public class PigLatinTranslator implements ActionListener {
     /**
      * Method to translate a english to pig latin.
      * 
@@ -8,6 +18,39 @@ public class PigLatinTranslator {
      *            The sentence in English
      * @return The pig latin version
      */
+	JButton button1;
+	JButton button2;
+	JButton button3;
+	String text_1;
+	String text_2;
+	JTextField text2;
+	JTextField text1;
+	public void run() {
+		// TODO Auto-generated method stub
+		text1 = new JTextField(10);
+		text2 = new JTextField(10);
+		button1 = new JButton();
+		button1.addActionListener(this);
+		button1.setText(">>");
+		button2 = new JButton();
+		button2.addActionListener(this);
+		button2.setText("<<");
+		button3 = new JButton();
+		button3.addActionListener(this);
+		button3.setText("Speak");
+		JFrame frame = new JFrame();
+		JPanel panel = new JPanel();
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(panel);
+		panel.add(text1);
+		panel.add(text2);
+		
+		panel.add(button1);
+		panel.add(button2);
+		panel.add(button3);
+		frame.pack();
+	}
     public static String translateEnglishToPigLatin(String s) {
         String latin = "";
         int i = 0;
@@ -120,4 +163,30 @@ public class PigLatinTranslator {
                 return i;
         return 0;
     }
+    public static void main(String[] args) {
+	    new PigLatinTranslator().run();
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+		if(e.getSource() == button1) {
+			text_1 = text1.getText();
+		
+			text2.setText(translateEnglishToPigLatin(text_1));
+		}
+		else if(e.getSource() == button2) {
+		
+			text_2 = text2.getText();
+			text1.setText(translatePigLatinToEnglish(text_2));
+		}
+		else if(e.getSource() == button3) {
+			text_1 = text1.getText();
+			text_2 = text2.getText();
+			Sound.speak(text_1);
+			Sound.speak(text_2);
+		}
+		
+	}
 }

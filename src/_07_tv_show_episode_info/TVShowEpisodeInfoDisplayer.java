@@ -1,6 +1,8 @@
 package _07_tv_show_episode_info;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -8,12 +10,29 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class TVShowEpisodeInfoDisplayer {
-	
+public class TVShowEpisodeInfoDisplayer implements ActionListener {
+	String text1;
 	public TVShowEpisodeInfoDisplayer() {
-		
+		JFrame frame = new JFrame();
+		frame.setVisible(true);
+		JPanel panel = new JPanel();
+		frame.add(panel);
+		panel.setName("TV Show Info");
+		JButton button = new JButton();
+		button.addActionListener(this);
+		button.setText("Submit");
+		panel.add(button);
+		JTextField text = new JTextField(10);
+		panel.add(text);
+		text1 = text.getText();
+		frame.pack();
 	}
 
 	
@@ -32,6 +51,7 @@ public class TVShowEpisodeInfoDisplayer {
 	 */
 	public String getShowEpisodeData(String showTitle) {
 		int id = WebUtilities.getShowId(showTitle);
+		System.out.println(id);
 		if(id < 0) {
 			return "";
 		}
@@ -73,5 +93,15 @@ public class TVShowEpisodeInfoDisplayer {
 		}
 		
 		return res;
+	}
+
+
+
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		getShowEpisodeData(text1);
 	}
 }

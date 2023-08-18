@@ -1,5 +1,7 @@
 package _06_calculator;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -9,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Calculator implements MouseListener {
+public class Calculator implements ActionListener {
 	JButton button1;
 	JButton button2;
 	JButton button3;
@@ -43,10 +45,10 @@ public class Calculator implements MouseListener {
 		text_2 = new JTextField(10);
 		frame.setVisible(true);
 		frame.add(panel);
-		button1.addMouseListener(this);
-		button2.addMouseListener(this);
-		button3.addMouseListener(this);
-		button4.addMouseListener(this);
+		button1.addActionListener(this);
+		button2.addActionListener(this);
+		button3.addActionListener(this);
+		button4.addActionListener(this);
 		button1.setText("Add");
 		button2.setText("Subtract");
 		button3.setText("Multiply");
@@ -58,18 +60,21 @@ public class Calculator implements MouseListener {
 		panel.add(button4);
 		panel.add(text_1);
 		panel.add(text_2);
-		text1 = Integer.parseInt(text_1.getText());
-		text2 = Integer.parseInt(text_2.getText());
+		
 		
 		frame.pack();
 		
 		
 	}
+	
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		text1 = Integer.parseInt(text_1.getText());
+		text2 = Integer.parseInt(text_2.getText());
 		JButton buttonPressed = (JButton) e.getSource();
 		if(buttonPressed == button1) {
+			
 			label.setText(add(text1, text2) + "");
 		}
 		else if(buttonPressed == button2) {
@@ -81,25 +86,5 @@ public class Calculator implements MouseListener {
 		else if(buttonPressed == button4) {
 			label.setText(divide(text1, text2) + "");
 		}
-	}
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 }
