@@ -1,9 +1,11 @@
 package _11_lights_out;
 
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -17,16 +19,27 @@ import javax.swing.JPanel;
  * 
  * 
  */
-public class LightsOut implements MouseListener {
 
+
+public class LightsOut implements MouseListener {
+	JFrame frame;
 	JPanel gamePanel = new JPanel();
 
 	public LightsOut() {
 
 		/** PART 1. CREATE YOUR LIGHT BOARD **/
 		//1. Make your gamePanel a 5x5 grid with setLayout(new GridLayout(5, 5));
+			gamePanel.setLayout(new GridLayout(5,5));
+			frame.setVisible(true);
+			for(int i = 0; i < 25; i++) {
+				JLabel label = new JLabel();
+				label.setText(i+"");
+				label.setBackground(Color.LIGHT_GRAY);
+				gamePanel.add(label);
 		
-		
+			}
+			background.setBackground
+			frame.add(gamePanel);
 			//2. Add 25 JLabels to your gamePanel (these are your lights)
 
 			//3. Use setText() to add a position number to each light (0-24).
@@ -41,7 +54,7 @@ public class LightsOut implements MouseListener {
 		//6. Add your panel to a frame
 
 		//7. Set the size of the frame
-
+		
 	}
 
 	@Override
