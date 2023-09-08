@@ -4,10 +4,14 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import javafx.scene.layout.BackgroundFill;
 
 /**
  * 
@@ -24,24 +28,40 @@ import javax.swing.JPanel;
 public class LightsOut implements MouseListener {
 	JFrame frame;
 	JPanel gamePanel = new JPanel();
-
+	JLabel arr[];
 	public LightsOut() {
-
-		/** PART 1. CREATE YOUR LIGHT BOARD **/
-		//1. Make your gamePanel a 5x5 grid with setLayout(new GridLayout(5, 5));
-			gamePanel.setLayout(new GridLayout(5,5));
-			frame.setVisible(true);
-			for(int i = 0; i < 25; i++) {
-				JLabel label = new JLabel();
-				label.setText(i+"");
-				label.setBackground(Color.LIGHT_GRAY);
-				gamePanel.add(label);
 		
-			}
-			background.setBackground
-			frame.add(gamePanel);
+		frame = new JFrame();
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		/** PART 1. CREATE YOUR LIGHT BOARD **/
+		
+		//1. Make your gamePanel a 5x5 grid with setLayout(new GridLayout(5, 5));
+		gamePanel.setLayout(new GridLayout(5,5));
+		
 			//2. Add 25 JLabels to your gamePanel (these are your lights)
+			arr = new JLabel[25];
+			
+			for(int i = 0; i < 25; i ++) {
+				arr[i] = new JLabel();
+				arr[i].addMouseListener(this);
+				arr[i].setText("" +(i+1));
+				
+				arr[i].setHorizontalAlignment(SwingConstants.CENTER);
+				Random ran = new Random();
+				if(ran.nextInt(25) %2 == 0 ) {
+					arr[i].setBackground(Color.LIGHT_GRAY);
+					System.out.println("Color Gray");
+				}
+				else {
+					arr[i].setBackground(Color.WHITE);
+				}
+				arr[i].setOpaque(true);
 
+				gamePanel.add(arr[i]);
+			}
+					frame.add(gamePanel);
+			frame.setSize(500,500);
 			//3. Use setText() to add a position number to each light (0-24).
 
 			//4. Set the background of each light to LIGHT_GRAY
@@ -72,7 +92,21 @@ public class LightsOut implements MouseListener {
 
 		/** PART 3: RANDOMIZE YOUR BOARD **/
 		// Now that your game works can you make the game start with some lights on?
-
+		JLabel lab =(JLabel) e.getSource();
+		for(int i = 0; i < arr.length; i ++) {
+			if(arr[i] == lab) {
+				makeMove(i);
+			}
+		}
+		int num = 0;
+		for(int i = 0; i < arr.length; i ++) {
+			if(getLightAtPosition(i).getBackground() == Color.WHITE) {
+				num ++;
+			}
+			if(num == 25) {
+				System.out.println("You won!");
+			}
+		}
 	}
 
 	void makeMove(int pos) {
@@ -99,6 +133,7 @@ public class LightsOut implements MouseListener {
 		if (label.getBackground() == Color.WHITE) {
 			label.setBackground(Color.LIGHT_GRAY);
 
+			
 		} else {
 			label.setBackground(Color.WHITE);
 		}
@@ -119,5 +154,6 @@ public class LightsOut implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+	
 	}
 }

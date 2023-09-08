@@ -10,6 +10,7 @@ import java.util.Random;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class SimonSays extends KeyAdapter {
@@ -21,7 +22,7 @@ public class SimonSays extends KeyAdapter {
 
     // Complete steps 1 - 7 before you test
     // 1. Declare a JFrame variable
-
+    JFrame frame;
     public void run() {
         // 2. Add the four images that match keyboard keys like this:
         // images.put(KeyEvent.VK_UP, "up.jpg");
